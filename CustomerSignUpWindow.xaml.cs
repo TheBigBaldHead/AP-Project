@@ -15,24 +15,21 @@ using System.Windows.Shapes;
 namespace WpfApp3
 {
     /// <summary>
-    /// Interaction logic for SignUpWindow.xaml
+    /// Interaction logic for CustomerSignUpWindow.xaml
     /// </summary>
-    public partial class SignUpWindow : Window
+    public partial class CustomerSignUpWindow : Window
     {
-        public SignUpWindow ()
+        public CustomerSignUpWindow ()
         {
             InitializeComponent();
         }
 
-        private void SignUpPageSubmitButtonClick (object sender, RoutedEventArgs e)
+        private void CustomerSignUpPageSubmitButtonClick (object sender, RoutedEventArgs e)
         {
-            if (PasswordEntry1.Password != PasswordEntry2.Password)
-                MessageBox.Show("Passwords don't match.");
-            else
-            {
-                // add the employee
-                Close();
-            }
+            // generate a random and unique username and password(both must be unique)
+            // E-mail the username and password to the customer
+            // add the customer information
+            Close();
         }
     }
 }

@@ -35,14 +35,26 @@ namespace WpfApp3
 
         private void LoginButtonClick (object sender, RoutedEventArgs e)
         {
-            SignUpWindow temp = new SignUpWindow();
-            temp.Show();
+            // if the person is a employee:
+            if (true)
+            {
+                EmployeePanel employeePanel = new EmployeePanel();
+                employeePanel.Show();
+                
+            }
+
+            // else if the person is a customer :
+            else
+            {
+                // open customer panel
+            }
+            Close();
         }
 
         private void SignUpButtonClick (object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            SignUpWindow temp = new SignUpWindow();
+            temp.Show();
         }
     }
 }
