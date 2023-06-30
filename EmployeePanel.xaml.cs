@@ -22,6 +22,19 @@ namespace WpfApp3
         public EmployeePanel ()
         {
             InitializeComponent();
+            ResizeMode = ResizeMode.NoResize;
+        }
+
+        private void CustomerSignUpButtonClick (object sender, RoutedEventArgs e)
+        {
+            CustomerSignUpWindow customerSignUpWindow = new CustomerSignUpWindow ();
+            customerSignUpWindow.Show ();
+        }
+
+        private void EmployeePanelOrderButton (object sender, RoutedEventArgs e)
+        {
+            TakeCustomerIdNumber takeCustomerIdNumber = new TakeCustomerIdNumber ();
+            takeCustomerIdNumber.Show();
         }
     }
 }

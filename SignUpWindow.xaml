@@ -154,7 +154,92 @@
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
-        
+        <Style x:Key="TextBoxError" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border1}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="#DB005B" BorderThickness="1.5" CornerRadius="5" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border1}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#DB005B"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <SolidColorBrush x:Key="TextBox.Static.Border3" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border3" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border3" Color="#FF569DE5"/>
+        <Style x:Key="PasswordBoxError" TargetType="{x:Type PasswordBox}">
+            <Setter Property="PasswordChar" Value="●"/>
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border3}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="#DB005B" BorderThickness="1.5" CornerRadius="3" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border3}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#DB005B"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -178,21 +263,31 @@
                     <TextBlock Margin="200 0 0 0">Last name</TextBlock>
                 </Grid>
                 <Grid>
-                    <TextBox Width="150" Style="{DynamicResource SignUpPageTextBox}" HorizontalAlignment="Left"></TextBox>
-                    <TextBox Width="150" Style="{DynamicResource SignUpPageTextBox}" Margin="110 0 0 0"></TextBox>
+                    <TextBox Name="FirstNameBox" Width="150" Style="{DynamicResource SignUpPageTextBox}" HorizontalAlignment="Left" TextChanged="NameBox_TextChanged"/>
+                    <TextBox Name="LastNameBox" Width="150" Style="{DynamicResource SignUpPageTextBox}" Margin="110 0 0 0" TextChanged="NameBox2_TextChanged"/>
                 </Grid>
                 <TextBlock Margin="0 10 0 3">Employee ID Number</TextBlock>
-                <TextBox Width="175" Style="{DynamicResource SignUpPageTextBox}" HorizontalAlignment="Left" MaxLength="10" ToolTip="10 digits"></TextBox>
+                <TextBox Name="IdField" Width="175" Style="{DynamicResource SignUpPageTextBox}" HorizontalAlignment="Left" MaxLength="10" TextChanged="Id_TextChanged" ToolTip="10 digits"/>
                 <TextBlock Margin="0 10 0 3">Username</TextBlock>
-                <TextBox Width="175" Style="{DynamicResource SignUpPageTextBox}" HorizontalAlignment="Left"></TextBox>
+                <TextBox Name="UsernameField" Width="175" Style="{DynamicResource SignUpPageTextBox}" HorizontalAlignment="Left" TextChanged="UsernameField_TextChanged"/>
                 <TextBlock HorizontalAlignment="Left" Margin="0 10 0 3">E-mail</TextBlock>
-                <TextBox Width="200" Style="{DynamicResource SignUpPageTextBox}" HorizontalAlignment="Left"></TextBox>
+                <TextBox Name="EmailField" Width="200" Style="{DynamicResource SignUpPageTextBox}" HorizontalAlignment="Left" TextChanged="EmailField_TextChanged"/>
                 <Grid Margin="0 30">
                     <StackPanel>
                         <TextBlock Margin="0 10 0 3">Password</TextBlock>
-                        <PasswordBox Name="PasswordEntry1" Width="175" Style="{DynamicResource SignUpPagePasswordBox}" HorizontalAlignment="Left" PasswordChar="*"></PasswordBox>
+                        <Grid HorizontalAlignment="Left" Width="200">
+                            <PasswordBox Name="PasswordEntry1" Width="175" Style="{DynamicResource SignUpPagePasswordBox}" HorizontalAlignment="Left" PasswordChar="*"></PasswordBox>
+                            <TextBox Name="PasswordEntry1Txt" Width="175" Style="{DynamicResource SignUpPageTextBox}" HorizontalAlignment="Left" Visibility="Collapsed"></TextBox>
+                        </Grid>
                         <TextBlock Margin="0 10 0 3">Re-enter Password</TextBlock>
-                        <PasswordBox Name="PasswordEntry2" Width="175" Style="{DynamicResource SignUpPagePasswordBox}" HorizontalAlignment="Left" PasswordChar="*"></PasswordBox>
+                        <Grid>
+                            <PasswordBox Name="PasswordEntry2" Width="175" Style="{DynamicResource SignUpPagePasswordBox}" HorizontalAlignment="Left" PasswordChar="*" 
+                                         ToolTip="Must be an exact match">
+                            </PasswordBox>
+                            <TextBox Name="PasswordEntry2Txt" Width="175" Style="{DynamicResource SignUpPageTextBox}" HorizontalAlignment="Left" Visibility="Collapsed"></TextBox>
+                        </Grid>
+                        <CheckBox Name="SignUpPageCheckBox" HorizontalAlignment="Left" Margin="0 5" IsChecked="False" Checked="SignUpPagePasswordCheckBox" Unchecked="SignUpPagePasswordCheckBox" Content="Password Visibility"/>
+                        
                     </StackPanel>
                 </Grid>
                 <Button Style="{DynamicResource SignUpPageButton}" Width="135" Height="45" FontSize="22" Background="#DA70D6" Foreground="White" Click="SignUpPageSubmitButtonClick">Submit</Button>

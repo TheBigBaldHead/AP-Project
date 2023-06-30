@@ -23,6 +23,7 @@ namespace WpfApp3
         public MainWindow ()
         {
             InitializeComponent();
+            ResizeMode = ResizeMode.NoResize;
         }
 
         private void TextBox_TextChanged (object sender, TextChangedEventArgs e)
@@ -55,6 +56,26 @@ namespace WpfApp3
         {
             SignUpWindow temp = new SignUpWindow();
             temp.Show();
+        }
+
+        private void LoginWindowPasswordVisibilityChechbox (object sender, RoutedEventArgs e)
+        {
+            if (CheckBox1.IsChecked == true)
+            {
+                LoginPagePasswordBox.Visibility = Visibility.Collapsed;
+
+                LoginPagePasswordBoxTxt.Text = LoginPagePasswordBox.Password;
+
+                LoginPagePasswordBoxTxt.Visibility = Visibility.Visible;
+            }
+            else if (CheckBox1.IsChecked == false)
+            {
+                LoginPagePasswordBox.Visibility = Visibility.Visible;
+
+                LoginPagePasswordBoxTxt.Text = string.Empty;
+
+                LoginPagePasswordBoxTxt.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
